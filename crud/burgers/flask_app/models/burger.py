@@ -11,8 +11,8 @@ class Burger:
         self.updated_at = data['updated_at']
 
     @classmethod
-    def save(cls,data):
-        query = "INSERT INTO burgers (name,bun,meat,calories,created_at,updated_at) VALUES (%(name)s,%(bun)s,%(meat)s,%(calories)s,NOW(),NOW())"
+    def save( cls , data ):
+        query = "INSERT INTO restaurants ( name , bun, meat, calories, restaurant_id, created_at , updated_at ) VALUES (%(name)s, %(bun)s, %(meat)s, %(calories)s, %(restaurant_id)s,NOW(),NOW());"
         return connectToMySQL('burgers').query_db(query,data)
 
     @classmethod

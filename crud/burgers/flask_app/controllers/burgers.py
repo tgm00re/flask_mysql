@@ -8,7 +8,7 @@ from flask_app.models.burger import Burger
 def index():
     return render_template("index.html")
 
-@app.route('/create',methods=['POST'])
+@app.route('/create/burger',methods=['POST'])
 def create():
     data = {
         "name":request.form['name'],
