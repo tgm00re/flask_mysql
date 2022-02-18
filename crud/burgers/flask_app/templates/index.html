@@ -11,6 +11,13 @@
 <body>
     <a href="/burgers">See all burgers</a>
     <form action="/create/burger" method="post" class="p-3 col-4 mx-auto my-5 bg-dark text-light">
+        {% with messages = get_flashed_messages() %} <!--Declare a variable called messages-->
+            {% if messages %} <!--Check if there are any messages to be displayed-->
+                {% for message in messages %}  <!-- Loop through eachh message-->
+                <p>{{message}}</p> <!--Display each message in a paragraph tag-->
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <h2 class="text-center text-primary">Create Burger:</h2>
 
         <select name="restaurant_id" id="restaurant_id">

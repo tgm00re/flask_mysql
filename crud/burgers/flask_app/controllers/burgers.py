@@ -10,6 +10,10 @@ def index():
 
 @app.route('/create/burger',methods=['POST'])
 def create():
+    if not Burger.validate_burger(request.form):
+        #redirect tot eh route where the burger form is rendered, in this case it's the index
+        return redirect('/')
+        #else there were no errors :)
     data = {
         "name":request.form['name'],
         "bun": request.form['bun'],

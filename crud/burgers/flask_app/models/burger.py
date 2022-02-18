@@ -1,5 +1,6 @@
 from sqlite3 import connect
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask import flash
 
 class Burger:
     def __init__(self,data):
@@ -41,3 +42,20 @@ class Burger:
     def destroy(cls,data):
         query = "DELETE FROM burgers WHERE id = %(id)s;"
         return connectToMySQL('burgers').query_db(query,data)
+
+
+    @staticmethod #static because it's loosely related to the class, but doesn't give the class functionality
+    def validate_burger(burger):
+        is_valid = True #Assume it's valid at first
+        if len(burger['name']) < 3:
+            flash("Name must be at at least 3 characters.") #Flash messages are strings that exist for just one redirect cycle. Flash uses ssion so that we "Flash" our error messages on the form page. The difference betweeen fllash and session is that flash messages only last for one redirect while session stays until it is manually popped. This makes flash perfect for validations! WE NEED TO IMPOR FLASH AND SET UP SESSION IN OUR __init__.py (not in this folder, in flask_app) d
+            is_valid = False
+        if len(burger['bun']) < 3:
+            flash("Bun must be at least 3 characters.")
+            is_valid = False
+        if int(burger['calories']) < 200:
+            flash("Calroies must be 200 or greater")
+        if len(burger['meat']) < 3:
+            flash("bun must be at least 3 characters.")
+            is_valid = False
+        return is_valid
